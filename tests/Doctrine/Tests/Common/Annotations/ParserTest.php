@@ -102,6 +102,25 @@ DOCBLOCK;
     }
 
     /**
+     * @group DCOM-6
+     */
+    public function testNonexistantNamespaceAlias()
+    {
+        $parser = new Parser;
+
+        $result = $parser->parse('@nonalias:Name(foo="bar")');
+        $this->assertEquals(0, count($result));
+    }
+
+    public function testNonexistantNamespaceAnnotation()
+    {
+        $parser = new Parser;
+
+        $result = $parser->parse('@This\Doesnt\Exist');
+        $this->assertEquals(0, count($result));
+    }
+
+    /**
      * @group DCOM-4
      */
     public function testNamespaceAliasAnnotationWithSeparator()

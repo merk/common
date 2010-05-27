@@ -235,6 +235,14 @@ class Parser
         // Effectively pick the name of the class (append default NS if none, grab from NS alias, etc)
         if (strpos($nameParts[0], ':')) {
             list ($alias, $nameParts[0]) = explode(':', $nameParts[0]);
+
+            // If the namespace alias doesnt exist, we can skip the rest of the processing
+            if (!isset($this->_namespaceAliases[$alias])) {
+                $this->_lexer->skipUntil(Lexer::T_AT);
+
+                return false;
+            }
+
             $name = $this->_namespaceAliases[$alias] . implode('\\', $nameParts);
         }
         else if (count($nameParts) == 1) {
