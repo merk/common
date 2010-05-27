@@ -248,7 +248,7 @@ class Parser
             ( ! $this->_isNestedAnnotation && $this->_lexer->lookahead != null &&
             ! $this->_lexer->isNextToken(Lexer::T_OPEN_PARENTHESIS) &&
             ! $this->_lexer->isNextToken(Lexer::T_AT)) ||
-            ! class_exists($name, false)
+            ! class_exists($name)
         ) {
             $this->_lexer->skipUntil(Lexer::T_AT);
 
