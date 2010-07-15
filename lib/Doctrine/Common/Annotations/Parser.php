@@ -275,10 +275,7 @@ class Parser
 
         // Is it really an annotation?
         // If the lookahead is "(" it surely is, otherwise class_exists decides.
-        if (
-            ($this->lexer->lookahead == null || ! $this->lexer->isNextToken(Lexer::T_OPEN_PARENTHESIS)) &&
-            ! class_exists($name, $this->autoloadAnnotations)
-        ) {
+        if (! class_exists($name, $this->autoloadAnnotations)) {
             $this->lexer->skipUntil(Lexer::T_AT);
             return false;
         }
